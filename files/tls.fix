@@ -1,0 +1,4 @@
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1"; Check: IsAdmin
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2"; Check: IsAdmin
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2"; ValueType: dword; ValueName: "DisabledByDefault"; ValueData: "0"; Check: IsAdmin
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.1"; ValueType: dword; ValueName: "DisabledByDefault"; ValueData: "0"; Check: IsAdmin

@@ -44,6 +44,9 @@ cp -R %SOURCEDIR%\Tcltk\Tcl%WIN% %R_HOME%\Tcl
 cp -R %SOURCEDIR%\extsoft %R_HOME%\extsoft
 cp %SOURCEDIR%\files\curl-ca-bundle.crt %R_HOME%\etc\curl-ca-bundle.crt
 
+:: Temporary fix to enable TLS 1.2
+type %SOURCEDIR%\files\tls.fix >> %R_HOME%\src\gnuwin32\installer\reg.iss
+
 :: Temporary fix for cairo stack
 mkdir %BUILDDIR%\%R_NAME%\cairo
 cp -R %SOURCEDIR%\cairo\lib\x64 %R_HOME%\cairo\win64
