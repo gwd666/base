@@ -1,6 +1,6 @@
-[submodule "extsoft"]
-	path = extsoft
-	url = https://github.com/rwinlib/extsoft
+[submodule "baselibs"]
+	path = baselibs
+	url = https://github.com/rwinlib/baselibs
 	branch = master
 [submodule "cairo"]
 	path = cairo
