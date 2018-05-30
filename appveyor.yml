@@ -1,4 +1,5 @@
 environment:
+  RTOOLS_VERSION: 34
   matrix:
 #    - source: https://cran.r-project.org/src/base/R-3/R-3.5.0.tar.gz
 #      RTOOLS_VERSION: 35
