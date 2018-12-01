@@ -1,0 +1,67 @@
+diff -ruN R-devel-orig/src/gnuwin32/cran/index.in R-devel/src/gnuwin32/cran/index.in
+--- R-devel-orig/src/gnuwin32/cran/index.in	2018-12-01 18:27:39.468551600 +0100
++++ R-devel/src/gnuwin32/cran/index.in	2018-12-01 18:34:57.471285300 +0100
+@@ -37,7 +37,7 @@
+ <h1>R-@RVER@ for Windows (32/64 bit)</h1>
+ 
+ <div class="download">
+-  <p><a href="@RWVER@-win.exe">Download R @RVER@ for Windows</a> <span>(62 megabytes, 32/64 bit)</span></p>
++  <p><a href="@RWVER@-win.exe">Download R @RVER@ for Windows</a> <span>(@SIZEMB@ megabytes, 32/64 bit)</span></p>
+   <ul>
+     <li><a href="../../windows/base/README.@RWVER@">Installation and other instructions</a></li>
+     <li><a href="NEWS.@RWVER@.html">New features in this version</a></li>
+diff -ruN R-devel-orig/src/gnuwin32/cran/Makefile R-devel/src/gnuwin32/cran/Makefile
+--- R-devel-orig/src/gnuwin32/cran/Makefile	2018-12-01 18:27:39.484171700 +0100
++++ R-devel/src/gnuwin32/cran/Makefile	2018-12-01 19:51:51.300374900 +0100
+@@ -7,6 +7,7 @@
+ SVNREVISION=`sed -e 1s/Revision:.// -e q < $(R_HOME)/SVN-REVISION`
+ RVER = $(shell cut -d' ' -f1 ../../../VERSION | sed -n 1p)
+ DATE = $(shell date +%F)
++SIZEMB = $(shell du -m ../installer/$(RPREFIX)-win.exe | cut -f1)
+ 
+ R_EXE = $(R_HOME)/$(BINDIR)/rterm.exe --vanilla --slave
+ 
+@@ -21,6 +22,7 @@
+ 	  $(SED) -e s/@RWVER@/$(RPREFIX)/g \
+ 	    -e s/@RVER@/$(RVER)/g \
+ 	    -e "s/@DATE@/$(DATE)/g" \
++	    -e "s/@SIZEMB@/$(SIZEMB)/g" \
+ 	    -e "s/@SVNREVISION@/$(SVNREVISION)/g" \
+ 	    -e "s/@FULLVERSION@/$(FULLVERSION)/g" $${page}.in >$${page}.html; \
+ 	done
+diff -ruN R-devel-orig/src/gnuwin32/cran/rdevel.in R-devel/src/gnuwin32/cran/rdevel.in
+--- R-devel-orig/src/gnuwin32/cran/rdevel.in	2018-12-01 18:27:39.468551600 +0100
++++ R-devel/src/gnuwin32/cran/rdevel.in	2018-12-01 18:35:04.612624500 +0100
+@@ -36,7 +36,7 @@
+ <h1>R-devel build for Windows (32/64 bit)</h1>
+ 
+ <div class="download">
+-  <p><a href="@RWVER@-win.exe">Download R-Devel build for Windows</a> <span>(62 megabytes, 32/64 bit)</span></p>
++  <p><a href="@RWVER@-win.exe">Download R-Devel build for Windows</a> <span>(@SIZEMB@ megabytes, 32/64 bit)</span></p>
+   <ul>
+     <li>This build of R-Devel uses the gcc 4.9.3 toolchain produced
+     by Jeroen Ooms.  For details, see <a href="https://github.com/rwinlib/r-base">the Github page</a>.</li>
+diff -ruN R-devel-orig/src/gnuwin32/cran/rpatched.in R-devel/src/gnuwin32/cran/rpatched.in
+--- R-devel-orig/src/gnuwin32/cran/rpatched.in	2018-12-01 18:27:39.452960900 +0100
++++ R-devel/src/gnuwin32/cran/rpatched.in	2018-12-01 18:35:00.886946400 +0100
+@@ -36,7 +36,7 @@
+ <h1>R-@FULLVERSION@ build for Windows (32/64 bit)</h1>
+ 
+ <div class="download">
+-  <p><a href="@RWVER@-win.exe">Download R-@FULLVERSION@ build for Windows</a> <span>(62 megabytes, 32/64 bit)</span></p>
++  <p><a href="@RWVER@-win.exe">Download R-@FULLVERSION@ build for Windows</a> <span>(@SIZEMB@ megabytes, 32/64 bit)</span></p>
+   <ul>
+     <li><a href="../../windows/base/README.@RWVER@">Installation and other instructions</a></li>
+     <li><a href="NEWS.@RWVER@.html">New features in this version</a></li>
+diff -ruN R-devel-orig/src/gnuwin32/cran/rtest.in R-devel/src/gnuwin32/cran/rtest.in
+--- R-devel-orig/src/gnuwin32/cran/rtest.in	2018-12-01 18:27:39.468551600 +0100
++++ R-devel/src/gnuwin32/cran/rtest.in	2018-12-01 18:34:53.531226700 +0100
+@@ -36,7 +36,7 @@
+ <h1>R-@FULLVERSION@ build for Windows (32/64 bit)</h1>
+ 
+ <div class="download">
+-  <p><a href="@RWVER@-win.exe">Download R-@FULLVERSION@ build for Windows</a> <span>(62 megabytes, 32/64 bit)</span></p>
++  <p><a href="@RWVER@-win.exe">Download R-@FULLVERSION@ build for Windows</a> <span>(@SIZEMB@ megabytes, 32/64 bit)</span></p>
+   <ul>
+     <li><a href="../../windows/base/README.@RWVER@">Installation and other instructions</a></li>
+     <li><a href="NEWS.@RWVER@.html">New features in this version</a></li>
