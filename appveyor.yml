@@ -19,6 +19,9 @@ environment:
   CertKit: C:\Program Files (x86)\Windows Kits\10\App Certification Kit\appcert.exe
   KeyFile: C:\jeroen.pfx
 
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 install:
   - ps: |
       Import-Module '.\scripts\appveyor-tool.ps1'
@@ -52,8 +55,9 @@ on_finish:
   - appveyor PushArtifact logs.zip
 
 on_failure:
-  - 7z a tests.zip %R_HOME%\tests\*.Rout*
+  - 7z a tests.zip %builddir%\R-source-win64\tests\*.Rout*
   - appveyor PushArtifact tests.zip
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 deploy:
   - provider: Environment
