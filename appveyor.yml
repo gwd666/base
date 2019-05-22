@@ -5,11 +5,11 @@ environment:
 #      archive: r-release    
     - source: https://cran.r-project.org/src/base-prerelease/R-devel.tar.gz
       archive: r-devel
-      cran: true
+#      cran: true
 #    - source: https://stat.ethz.ch/R/daily/R-patched.tar.gz
-    - source: https://cran.r-project.org/src/base-prerelease/R-latest.tar.gz
-      archive: r-patched
-      cran: true
+#    - source: https://cran.r-project.org/src/base-prerelease/R-latest.tar.gz
+#      archive: r-patched
+#      cran: true
 
   PfxUri:
     secure: z+vP1iY4odY07BV7v+yfuA2MBKQFFLGokZoefPhz22evsMT/KnwtB4NgcYNLJheI
@@ -35,9 +35,9 @@ build_script:
   - .\scripts\build.bat R-source.tar.gz 64
 
 after_build:
-  - ps: Start-FileDownload $env:PfxUri -FileName $env:KeyFile
-  - ps: SignFiles "${env:builddir}\${env:target}-win.exe"
-  - ps: Remove-Item –path $env:KeyFile
+#  - ps: Start-FileDownload $env:PfxUri -FileName $env:KeyFile
+#  - ps: SignFiles "${env:builddir}\${env:target}-win.exe"
+#  - ps: Remove-Item –path $env:KeyFile
   - cd %builddir%
   - md5sum %target%-win.exe > md5sum.txt.%target%
   - cd %startdir%

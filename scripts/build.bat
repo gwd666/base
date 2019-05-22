@@ -63,15 +63,19 @@ xcopy /s "%SOURCEDIR%\cairo\include\cairo" "%R_HOME%\cairo\win64"
 
 :: Mark output as experimental
 ::sed -i "s/Under development (unstable)/EXPERIMENTAL/" %R_HOME%/VERSION
-::echo cat('R-experimental') > %R_HOME%/src/gnuwin32/fixed/rwver.R
+echo cat('R-jenny') > %R_HOME%/src/gnuwin32/fixed/rwver.R
 ::sed -i "s|Unsuffered Consequences|Blame Jeroen|" %R_HOME%/VERSION-NICK
-
 ::echo PATH="C:\Rtools\bin;${PATH}" > %R_HOME%/etc/Renviron.site
 
 :: apply local patches
 cd %R_HOME%
 patch -p1 -i %SOURCEDIR%\patches\cairo.diff
 patch -p1 -i %SOURCEDIR%\patches\shortcut.diff
+
+:: Apply Jenny's clipboard patch
+curl -OL https://patch-diff.githubusercontent.com/raw/jeroen/r-source/pull/5.patch
+patch -p1 -i 5.patch
+echo "OK!"
 
 :: Switch dir
 cd %R_HOME%/src/gnuwin32
@@ -146,8 +150,7 @@ set reltype=patched
 ) ELSE IF "%target:~0,3%"=="R-3" (
 set reltype=release
 ) ELSE (
-echo "Unknown target type: %target%"
-exit /b 1
+set reltype=devel
 )
 
 :: Symlink (disabled because doesn't survive sftp)
