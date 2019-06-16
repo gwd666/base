@@ -53,13 +53,12 @@ cp -R %SOURCEDIR%\Tcltk\Tcl%WIN% %R_HOME%\Tcl
 cp -R %SOURCEDIR%\baselibs %R_HOME%\extsoft
 cp %SOURCEDIR%\files\curl-ca-bundle.crt %R_HOME%\etc\curl-ca-bundle.crt
 
-:: Temporary fix for cairo stack
-mkdir %BUILDDIR%\%R_NAME%\cairo
-cp -R %SOURCEDIR%\cairo\lib\x64 %R_HOME%\cairo\win64
-cp -R %SOURCEDIR%\cairo\lib\i386 %R_HOME%\cairo\win32
-xcopy /s "%SOURCEDIR%\cairo\include\cairo" "%R_HOME%\cairo\win32"
-xcopy /s "%SOURCEDIR%\cairo\include\cairo" "%R_HOME%\cairo\win64"
-
+:: Test with legacy libcairo
+curl -OL https://www.rforge.net/Cairo/files/cairo-current-win.tar.gz
+tar -xf cairo-current-win.tar.gz --strip-components=1
+mkdir %R_HOME%\cairo
+cp -R win32 %R_HOME%\cairo\
+cp -R win64 %R_HOME%\cairo\
 
 :: Mark output as experimental
 ::sed -i "s/Under development (unstable)/EXPERIMENTAL/" %R_HOME%/VERSION
@@ -70,8 +69,12 @@ xcopy /s "%SOURCEDIR%\cairo\include\cairo" "%R_HOME%\cairo\win64"
 
 :: apply local patches
 cd %R_HOME%
-patch -p1 -i %SOURCEDIR%\patches\cairo.diff
+::patch -p1 -i %SOURCEDIR%\patches\cairo.diff
 patch -p1 -i %SOURCEDIR%\patches\shortcut.diff
+patch -p1 -i %SOURCEDIR%\patches\cairolibs.diff
+patch -p1 -i %SOURCEDIR%\patches\trio.diff
+patch -p1 -i %SOURCEDIR%\patches\fflags.diff
+
 
 :: Switch dir
 cd %R_HOME%/src/gnuwin32
