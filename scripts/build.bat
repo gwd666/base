@@ -115,13 +115,6 @@ if %errorlevel% neq 0 (
 )
 echo make distribution complete!
 
-make check-all > %BUILDDIR%/check.log 2>&1
-if %errorlevel% neq 0 (
-	echo ERROR: 'make check-all' failure! Inspect check.log for details.
-	type %builddir%\check.log
-	exit /b 2
-)
-
 :: Get the actual version name
 call %R_HOME%\src\gnuwin32\cran\target.cmd
 
