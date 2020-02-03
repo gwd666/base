@@ -1,5 +1,5 @@
 # Add build tools (sh, make, sed) to PATH
 local({
-  utils <- normalizePath("C:/PROGRA~1/Rtools/bin", mustWork = FALSE)
+  utils <- normalizePath("C:/Rtools/bin", mustWork = FALSE)
   Sys.setenv(PATH = paste(utils, Sys.getenv("PATH"), sep = ";"))
 })

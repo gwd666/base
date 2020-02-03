@@ -34,8 +34,8 @@ EXT_LIBS = @home@/extsoft
 ## For installer
 ISDIR = C:/Program Files (x86)/Inno Setup 6
 TI5 = $(RTOOLS)/texinfo5
-MAKEINFO = C:/Data/Local/Programs/strawberry-perl-portable/perl/bin/perl -I$(TI5) $(TI5)/texi2any
-TEXI2ANY = C:/Data/Local/Programs/strawberry-perl-portable/perl/bin/perl -I$(TI5) $(TI5)/texi2any
+MAKEINFO = C:/Strawberry/perl/bin/perl -I$(TI5) $(TI5)/texi2any
+TEXI2ANY = C:/Strawberry/perl/bin/perl -I$(TI5) $(TI5)/texi2any
 BUILD_HTML = YES 
 MIKTEX = TRUE
 HOME32 = @home32@
