@@ -1,24 +1,29 @@
-# R for Windows [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rwinlib/base)](https://ci.appveyor.com/project/jeroen/base)
+# R 3.x for Windows (retired) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rwinlib/base)](https://ci.appveyor.com/project/jeroen/base)
 
-> Official repository for building R on Windows
+> Scripts used to build R 3.3.x - 3.6.x on Windows
 
-This repository is used for daily builds on [appveyor](https://ci.appveyor.com/project/jeroen/base) which get deployed on [CRAN](https://cran.r-project.org/bin/windows/base/).
+## __Important:__ retirement notice
+
+This repository was used to build daily R-devel installers and official R releases of R 3.3 - 3.6. As of R version 4.0 (April 2020), we have switched to a new build system based on rtools40, found here: https://github.com/r-windows/r-base. 
+
+The current repository will be kept around for historical purposes (and it may still work) but is no longer maintained.
 
 ## Local Requirements
 
 Building R on Windows requires the following tools:
 
- - Latest [Rtools](https://cran.r-project.org/bin/windows/Rtools/) compiler toolchain
+ - [Rtools 3.5](https://cran.r-project.org/bin/windows/Rtools/) compiler toolchain
  - Recent [MiKTeX](https://miktex.org/) + packages `fancyvrb`, `inconsolata`, `epsf`, `mptopdf`, `url`
  - [Inno Setup](http://www.jrsoftware.org/isdl.php) to build the installer
  - Perl such as [Strawberry Perl](http://strawberryperl.com/)
 
-Except for Rtools, all of these can be installed using [chocolatey](https://chocolatey.org/):
+Each of these can also be installed using [chocolatey](https://chocolatey.org/):
 
 ```
+choco install rtools --version=3.5.0.4
 choco install miktex
+choco install innosetup
 choco install strawberryperl
-choco install innosetup --pre
 ```
 
 Alternatively, the [appveyor-tools.ps1](scripts/appveyor-tool.ps1) powershell script can also be used for unattended installation of these tools.

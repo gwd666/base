@@ -72,14 +72,6 @@ xcopy /s "%SOURCEDIR%\cairo\include\cairo" "%R_HOME%\cairo\win64"
 cd %R_HOME%
 patch -p1 -i %SOURCEDIR%\patches\shortcut.diff
 
-:: Remove conditioning when r-devel switched to new toolchain
-if "%archive%" == "r-devel" (
-	echo "Skipping cairo patch"
-) else (
-	echo archive: %archive%
-	patch -p1 -i %SOURCEDIR%\patches\cairo.diff
-)
-
 :: Switch dir
 cd %R_HOME%/src/gnuwin32
 
@@ -115,6 +107,7 @@ if %errorlevel% neq 0 (
 )
 echo make distribution complete!
 
+set R_CRAN_WEB=https://cran.rstudio.com
 make check-all > %BUILDDIR%/check.log 2>&1
 if %errorlevel% neq 0 (
 	echo ERROR: 'make check-all' failure! Inspect check.log for details.
